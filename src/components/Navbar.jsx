@@ -15,7 +15,7 @@ const navigation = [
 ];
 
 const Navbar = () => {
-  const currentUser = true;
+  const currentUser = false;
 
   const [isDropdownOpen, setisDropdownOpen] = useState(false);
   console.log(isDropdownOpen);
