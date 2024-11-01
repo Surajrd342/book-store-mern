@@ -9,6 +9,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    //Add a product in the Cart
     addToCart: (state, action) => {
       const existingItem = state.cartItems.find(
         (item) => item._id === action.payload._id
@@ -33,9 +34,21 @@ const cartSlice = createSlice({
           confirmButtonText: "OK!",
         });
     },
+
+    //Remove a Product from the Cart
+    removeFromCart: (state, action) => {
+      state.cartItems = state.cartItems.filter(
+        (item) => item._id !== action.payload._id
+      );
+    },
+
+    //Delete all the products at a time
+    clearCart: (state) => {
+      state.cartItems = [];
+    },
   },
 });
 
 // export the actions
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
 export default cartSlice.reducer;
