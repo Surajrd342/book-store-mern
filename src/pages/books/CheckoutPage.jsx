@@ -22,17 +22,23 @@ const CheckoutPage = () => {
 
   const [isChecked, setIsChecked] = useState(false);
   const onSubmit = (data) => {
-    console.log(data);
-    // const newOrder = {
-    //   name: data.name,
-    //   email: currentUser?.email,
-    //   address: {
-    //     city
-    //   }
-    // }
-  }
-
-
+    // console.log(data);
+    //Store a data for Backend
+    const newOrder = {
+      name: data.name,
+      email: currentUser?.email,
+      address: {
+        city: data.city,
+        country: data.country,
+        state: data.state,
+        zipcode: data.zipcode
+      },
+      phone: data.phone,
+      productIds: cartItems.map(item => item?._id),
+      totalPrice: totalPrice,
+    }
+    console.log(newOrder)
+  };
 
   return (
     <>
@@ -65,6 +71,7 @@ const CheckoutPage = () => {
                       <div className="md:col-span-5">
                         <label htmlFor="full_name">Full Name</label>
                         <input
+                          {...register("name", { required: true })}
                           type="text"
                           name="name"
                           id="name"
@@ -79,7 +86,7 @@ const CheckoutPage = () => {
                           name="email"
                           id="email"
                           className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                          // disabled
+                          disabled
                           defaultValue={currentUser?.email}
                           placeholder="email@domain.com"
                         />
@@ -87,6 +94,7 @@ const CheckoutPage = () => {
                       <div className="md:col-span-5">
                         <label html="phone">Phone Number</label>
                         <input
+                          {...register("phone", { required: true })}
                           type="number"
                           name="phone"
                           id="phone"
@@ -98,6 +106,7 @@ const CheckoutPage = () => {
                       <div className="md:col-span-3">
                         <label htmlFor="address">Address / Street</label>
                         <input
+                          {...register("address", { required: true })}
                           type="text"
                           name="address"
                           id="address"
@@ -109,6 +118,7 @@ const CheckoutPage = () => {
                       <div className="md:col-span-2">
                         <label htmlFor="city">City</label>
                         <input
+                          {...register("city", { required: true })}
                           type="text"
                           name="city"
                           id="city"
@@ -121,6 +131,7 @@ const CheckoutPage = () => {
                         <label htmlFor="country">Country / region</label>
                         <div className="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
                           <input
+                            {...register("country", { required: true })}
                             name="country"
                             id="country"
                             placeholder="Country"
@@ -166,6 +177,7 @@ const CheckoutPage = () => {
                         <label htmlFor="state">State / province</label>
                         <div className="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
                           <input
+                            {...register("state", { required: true })}
                             name="state"
                             id="state"
                             placeholder="State"
@@ -207,6 +219,7 @@ const CheckoutPage = () => {
                       <div className="md:col-span-1">
                         <label htmlFor="zipcode">Zipcode</label>
                         <input
+                          {...register("zipcode", { required: true })}
                           type="text"
                           name="zipcode"
                           id="zipcode"
@@ -218,6 +231,7 @@ const CheckoutPage = () => {
                       <div className="md:col-span-5 mt-3">
                         <div className="inline-flex items-center">
                           <input
+                            onChange={(e) => setIsChecked(e.target.checked)}
                             type="checkbox"
                             name="billing_same"
                             id="billing_same"

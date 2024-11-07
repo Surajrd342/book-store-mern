@@ -15,13 +15,13 @@ const CartPage = () => {
 
   //Remove a proudct from Cart
   const handleRemoveFromCart = (product) => {
-    dispatch(removeFromCart(product))
+    dispatch(removeFromCart(product));
   };
 
   //Clear All product from Cart
   const handleClearCart = () => {
-    dispatch(clearCart())
-  }
+    dispatch(clearCart());
+  };
 
   return (
     <>
